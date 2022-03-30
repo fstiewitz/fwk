@@ -1,15 +1,8 @@
-import sys
-
 import torch
-from datasets import load_metric, load_dataset
-from torch.utils.data.dataset import Dataset
-from transformers import AutoTokenizer, AutoModelForCausalLM, \
-    DataCollatorForLanguageModeling, Seq2SeqTrainer, Seq2SeqTrainingArguments, AutoModelForSeq2SeqLM, \
-    EarlyStoppingCallback
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 import constants
 import processing
-
 
 KEYMODEL = "./keyword-generator-t5-small-30-3-4"
 TEXTMODEL = "./text-generator-t5-small-30-3-4"
@@ -55,7 +48,8 @@ if __name__ == '__main__':
 
     for sid, pid, sentences, nk, next_sentence in train_data[:1000]:
         next_keywords = get_keywords_from_model(sentences, key_tokenizer, key_model)
-        next_s = get_text_from_model(sentences, next_keywords, constants.TEXTTOKENIZER_SOURCE_LENGTH, text_tokenizer, text_model)
+        next_s = get_text_from_model(sentences, next_keywords, constants.TEXTTOKENIZER_SOURCE_LENGTH, text_tokenizer,
+                                     text_model)
         next_t = text_tokenizer.tokenize(next_sentence)
         results.append((sid, pid, sentences, nk, next_keywords, next_s, next_t, next_sentence))
         print("%s\n%s\n" % (next_s, next_sentence))

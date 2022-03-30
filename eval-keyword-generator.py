@@ -1,18 +1,15 @@
 import os
 
 import torch
-from datasets import load_metric
-from torch.utils.data.dataset import Dataset
-from transformers import AutoTokenizer, AutoModelForCausalLM, \
-    DataCollatorForLanguageModeling, Seq2SeqTrainer, Seq2SeqTrainingArguments, AutoModelForSeq2SeqLM, \
-    EarlyStoppingCallback, DataCollatorForSeq2Seq
+from transformers import AutoTokenizer, Seq2SeqTrainingArguments, AutoModelForSeq2SeqLM, \
+    EarlyStoppingCallback
 
 import constants
 import processing
+from keywordgeneratordataset import KeywordGeneratorDataset
 from performant_trainer import PerformantTrainer
 
 tokenizer = None
-
 
 MODEL = "./keyword-generator-t5-small-30-3-4"
 
@@ -25,7 +22,7 @@ def process_model(modelname, dataset):
     tokenizer.max_length = constants.KEYWORDTOKENIZER_SOURCE_LENGTH
     max_target_length = constants.KEYWORDTOKENIZER_TARGET_LENGTH
 
-    full_eval_dataset = KeywordGeneratorDataset(tokenizer, eval_data, tokenizer.max_length, max_target_length)
+    full_eval_dataset = KeywordGeneratorDataset(tokenizer, dataset, tokenizer.max_length, max_target_length)
 
     training_args = Seq2SeqTrainingArguments("eval-keywords")
     training_args.per_device_train_batch_size = 16
@@ -73,7 +70,7 @@ if __name__ == '__main__':
     testing = ["%s/%s" % (MODEL, x) for x in sorted(os.listdir(MODEL), key=numkey) if x.startswith("checkpoint-")]
     testing.append(MODEL)
     print(testing)
-    #for p in testing:
+    # for p in testing:
     #    results.append((p, process_model(p, eval_data)))
     results.append((MODEL, process_model(MODEL, eval_data)))
 

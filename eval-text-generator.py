@@ -1,11 +1,7 @@
 import os
 
 import torch
-from datasets import load_metric
-from torch.utils.data.dataset import Dataset
-from transformers import AutoTokenizer, AutoModelForCausalLM, \
-    DataCollatorForLanguageModeling, Seq2SeqTrainer, Seq2SeqTrainingArguments, AutoModelForSeq2SeqLM, \
-    EarlyStoppingCallback, DataCollatorForSeq2Seq
+from transformers import AutoTokenizer, Seq2SeqTrainingArguments, AutoModelForSeq2SeqLM
 
 import constants
 import processing
@@ -69,7 +65,7 @@ if __name__ == '__main__':
     testing = ["%s/%s" % (MODEL, x) for x in sorted(os.listdir(MODEL), key=numkey) if x.startswith("checkpoint-")]
     testing.append(MODEL)
     print(testing)
-    #for p in testing:
+    # for p in testing:
     #    results.append((p, process_model(p, eval_data)))
     results.append((MODEL, process_model(MODEL, eval_data)))
 

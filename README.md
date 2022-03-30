@@ -12,8 +12,8 @@
 
 #### Usage
 
-Most scripts save their results in `scripts` for use by other scripts.
-All data is serialized using `torch.save` / `torch.load`.
+Most scripts save their results in `scripts` for use by other scripts. All data is serialized using `torch.save`
+/ `torch.load`.
 
 1. Load dataset from HuggingFace and prepare for our tasks.
 
@@ -23,7 +23,8 @@ cd scripts
 ./prepare-text-generator.py
 ```
 
-2. Calculate maximum lengths of inputs and outputs for faster training. Then insert the results into `constants.py`. Default values are already set.
+2. Calculate maximum lengths of inputs and outputs for faster training. Then insert the results into `constants.py`.
+   Default values are already set.
 
 ```sh
 ./calculate-bounds.py

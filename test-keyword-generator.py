@@ -1,16 +1,12 @@
-import sys
-
 import torch
-from datasets import load_metric
-from torch.utils.data.dataset import Dataset
-from transformers import AutoTokenizer, AutoModelForCausalLM, \
-    DataCollatorForLanguageModeling, Seq2SeqTrainer, Seq2SeqTrainingArguments, AutoModelForSeq2SeqLM, \
-    EarlyStoppingCallback
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 import constants
 import processing
 
 KEYWORDMODEL = "./keyword-generator-t5-small-30-3-4"
+
+
 # KEYWORDMODEL = "t5-small"
 
 

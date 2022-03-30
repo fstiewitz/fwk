@@ -1,14 +1,13 @@
 import random
+
 import torch
-from torch.utils.data.dataset import Dataset
 from transformers import AutoTokenizer, \
-    DataCollatorForLanguageModeling, Seq2SeqTrainer, Seq2SeqTrainingArguments, AutoModelForSeq2SeqLM
+    Seq2SeqTrainingArguments, AutoModelForSeq2SeqLM
 
 import constants
 import processing
 from keywordgeneratordataset import KeywordGeneratorDataset
 from performant_trainer import PerformantTrainer
-
 
 MODEL = "t5-small"
 OUTPUT = "keyword-generator-t5-small-30-3-4"
@@ -48,7 +47,7 @@ if __name__ == '__main__':
     training_args.num_train_epochs = 30
     training_args.learning_rate = 2e-4
     # training_args.learning_rate = 0.001
-    training_args.metric_for_best_model="accuracy"
+    training_args.metric_for_best_model = "accuracy"
     training_args.eval_steps = 100
     training_args.save_steps = 4000
 

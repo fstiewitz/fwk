@@ -2,6 +2,7 @@ import torch
 
 import processing
 
+
 def bleuscore(pred, label):
     return processing.bleu.compute(predictions=[pred.split()], references=[[label.split()]], smooth=True)["bleu"]
 

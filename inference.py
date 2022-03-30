@@ -1,11 +1,6 @@
 import sys
 
-import torch
-from datasets import load_metric
-from torch.utils.data.dataset import Dataset
-from transformers import AutoTokenizer, AutoModelForCausalLM, \
-    DataCollatorForLanguageModeling, Seq2SeqTrainer, Seq2SeqTrainingArguments, AutoModelForSeq2SeqLM, \
-    EarlyStoppingCallback
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 import constants
 import processing
@@ -56,6 +51,7 @@ if __name__ == '__main__':
             text += '.'
         for i in range(5):
             keywords = get_keywords_from_model(text, keyword_tokenizer, keyword_model)
-            next_sentence = get_text_from_model(text, keywords, constants.TEXTTOKENIZER_SOURCE_LENGTH, text_tokenizer, text_model)
+            next_sentence = get_text_from_model(text, keywords, constants.TEXTTOKENIZER_SOURCE_LENGTH, text_tokenizer,
+                                                text_model)
             text += next_sentence + ('.' if next_sentence[-1] != '.' else '')
             print(next_sentence)

@@ -1,4 +1,3 @@
-import functools
 from math import floor
 
 import numpy as np
@@ -7,6 +6,7 @@ from matplotlib import pyplot as plt
 
 keys = [2, 8, 104, 114, 198, 210, 249]
 eval_values = []
+
 
 def make_indiviual_plot(ax0):
     global eval_values
@@ -19,7 +19,7 @@ def make_indiviual_plot(ax0):
     ])
     ax0.set_ylabel("BERTScore")
     ax0.set_title("BERTScores of eval samples")
-    #for x in keys:
+    # for x in keys:
     #    ax0.axvline(x=x, color='red', alpha=0.5)
     ax0.legend()
 
