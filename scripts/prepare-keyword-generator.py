@@ -5,7 +5,8 @@ from rake_nltk import Rake
 TRAINSIZE = 15000
 MAXKEYWORDS = 4
 
-# This script loads ROCStories and prepares the dataset for keyword generation
+# This script loads ROCStories and prepares the dataset for keyword generation Rake may require stopwords from NLTK (
+# if not already downloaded: `python -c "import nltk; nltk.download('stopwords')"`)
 if __name__ == '__main__':
     rake = Rake()
     roc_stories = load_dataset("adamlin/roc_story")
